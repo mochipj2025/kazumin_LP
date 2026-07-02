@@ -24,7 +24,7 @@
                     colors: {
                         brand: {
                             deepred: '#4a030d',  // 熟成された最高級ワインのようなボルドー
-                            red: '#830b1e',      // 情熱のメインレッド
+                            red: '#830b1e',      // 情熱 of メインレッド
                             brightred: '#b3152c',// ハイライト
                             gold: '#c5a059',     // アンティークゴールド
                             lightgold: '#f0e3ca',// シャンパンベージュの輝き
@@ -56,10 +56,10 @@
         }
         
         /* 画像ズーム用のホバーアニメーション */
-        .zoom-img-container img {
+        .zoom-img-container img, .zoom-img-container video {
             transition: transform 1.8s cubic-bezier(0.16, 1, 0.3, 1);
         }
-        .zoom-img-container:hover img {
+        .zoom-img-container:hover img, .zoom-img-container:hover video {
             transform: scale(1.04);
         }
 
@@ -89,7 +89,7 @@
             background: #4a030d;
         }
 
-        /* 画像が読み込まれるまでの美しい骨格フェードイン */
+        /* 画像・動画が読み込まれるまでの美しい骨格フェードイン */
         .image-loaded {
             opacity: 1 !important;
             transform: scale(1) !important;
@@ -194,19 +194,19 @@
             <!-- Right Column: Premium Hero Image Box -->
             <div class="lg:col-span-7 flex justify-center items-center order-1 lg:order-2">
                 <div class="relative w-full max-w-md lg:max-w-lg aspect-[3/4] bg-brand-beige p-2 sm:p-4 shadow-2xl transition-transform duration-700 hover:scale-[1.01]">
-                    <!-- Decorative Frame Boarders -->
+                    <!-- Decorative Frame Borders -->
                     <div class="absolute inset-1.5 sm:inset-2.5 border border-brand-gold/30 pointer-events-none"></div>
                     
                     <!-- Editorial Corner Details -->
                     <div class="absolute top-3 sm:top-5 left-5 sm:left-7 font-playfair text-[9px] tracking-[0.2em] text-brand-gold">EST. 2021</div>
                     <div class="absolute top-3 sm:top-5 right-5 sm:right-7 font-playfair text-[9px] tracking-[0.2em] text-brand-gold">PORTFOLIO ISSUE</div>
 
-                    <!-- Real Image Container (Now Video) -->
+                    <!-- Real Image Container (Now Video with cache-buster .mp4) -->
                     <div class="w-full h-full bg-brand-deepred relative overflow-hidden group zoom-img-container">
                         <!-- Smooth Overlay -->
                         <div class="absolute inset-0 bg-gradient-to-t from-brand-deepred/20 via-transparent to-transparent z-10 pointer-events-none"></div>
                         
-                        <!-- THE HERO VIDEO WITH CASH BUSTER -->
+                        <!-- THE HERO VIDEO WITH CACHE BUSTER -->
                         <video id="hero-video" autoplay loop muted playsinline poster="hero.png" 
                                class="absolute inset-0 w-full h-full object-cover z-20 transition-all duration-[1.5s] opacity-0"
                                onloadeddata="this.classList.add('image-loaded'); document.getElementById('hero-img-fallback').style.display='none';">
@@ -547,10 +547,12 @@
                             「すべての女性に、人生の真の創造主（クリエイター）になる力がある」という強烈な信念のもと、一時的なノウハウに終始しない「本質なアートディレクションと価値設計」を確立。これまでに500名以上の経営者、クリエイター、主婦の自立をデザインし、精神的・経済的自由へと導く。
                         </p>
                     </div>
-                <!-- Right Column: Profile Image styled beautifully (Now Profile Video) -->
-                <div class="lg:col-span-5 reveal-element order-1 lg:order-2">
+                </div>
+
+                <!-- Right Column: Profile Image styled beautifully (Now Profile Video, properly nested) -->
+                <div class="lg:col-span-5 reveal-element order-1 lg:order-2 w-full">
                     <div class="relative w-full max-w-sm mx-auto aspect-[4/5] bg-brand-deepred p-3 border border-brand-gold/40 shadow-2xl">
-                        <!-- THE PROFILE VIDEO WITH CASH BUSTER -->
+                        <!-- THE PROFILE VIDEO WITH CACHE BUSTER -->
                         <div class="w-full h-full overflow-hidden zoom-img-container relative bg-brand-deepred">
                             <video id="profile-video" autoplay loop muted playsinline poster="profile.png" 
                                    class="absolute inset-0 w-full h-full object-cover z-20 transition-all duration-[1.5s] opacity-0"
@@ -559,7 +561,7 @@
                             </video>
 
                             <!-- Fallback UI Info -->
-                            <div id="profile-img-fallback" class="absolute inset-0 flex flex-col justify-between p-6 text-white z-10 bg-brand-deepred/60">
+                            <div id="profile-img-fallback" class="absolute inset-0 flex flex-col justify-between p-6 text-white z-10 bg-brand-deepred/60 animate-pulse">
                                 <span class="font-sans text-[9px] tracking-widest uppercase text-brand-gold font-bold">Profile Scene</span>
                                 <div class="text-center my-auto">
                                     <span class="font-serif text-base font-light tracking-widest text-brand-lightgold">「ありのままを価値に」</span>
@@ -589,7 +591,7 @@
             </h2>
             
             <p class="font-serif text-brand-lightgold/85 text-xs sm:text-sm tracking-widest leading-relaxed max-w-lg mx-auto mb-10 md:mb-14">
-                磨き上げられたディテール、確かな意志、そして人々の感情を動かす演出。<br class="hidden sm:inline" />
+                磨き上げられたディテール、確かな意志、転換点の感情を動かす演出。<br class="hidden sm:inline" />
                 唯一無二の影響力を持った「自立のストーリー」を、ここから共に紡ぎましょう。
             </p>
 
@@ -812,7 +814,7 @@
             }
         });
 
-        // Robust Video Load Checker to bypass caching issues
+        // Robust Video Load & Playback Controller to bypass autoplay policy restrictions
         function forceVideoReveal() {
             const videos = [
                 { video: document.getElementById('hero-video'), fallback: document.getElementById('hero-img-fallback') },
@@ -821,15 +823,28 @@
 
             videos.forEach(item => {
                 if (item.video) {
-                    // Check if video is already loaded or has enough data loaded due to cache
+                    // Try to trigger modern play promise
+                    const playPromise = item.video.play();
+                    
+                    if (playPromise !== undefined) {
+                        playPromise.catch(error => {
+                            console.log("Autoplay policy required a direct user interaction, retrying muted play...", error);
+                            // Ensure muted fallback is strictly active and trigger play again
+                            item.video.muted = true;
+                            item.video.play().catch(e => console.log("Video playback paused by browser policies.", e));
+                        });
+                    }
+
+                    // Watch the ready state
                     if (item.video.readyState >= 2) { 
                         item.video.classList.add('image-loaded');
                         if (item.fallback) item.fallback.style.display = 'none';
                     } else {
-                        // Fallback listener in case it loads slowly
+                        // Fallback listener
                         item.video.addEventListener('loadeddata', function() {
                             item.video.classList.add('image-loaded');
                             if (item.fallback) item.fallback.style.display = 'none';
+                            item.video.play().catch(() => {});
                         });
                     }
                 }
