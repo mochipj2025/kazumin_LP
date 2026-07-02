@@ -23,14 +23,14 @@
                 extend: {
                     colors: {
                         brand: {
-                            deepred: '#4a030d',  // 熟成された最高級ワインを彷彿とさせるボルドー
-                            red: '#830b1e',      // メインの情熱的なレッド
-                            brightred: '#b3152c',// ハイライト用の赤
-                            gold: '#c5a059',     // ギラつきを抑えたクラシックアンティークゴールド
-                            lightgold: '#f0e3ca',// 柔らかなシャンパンベージュの輝き
-                            dark: '#120d0e',     // 漆黒に近いリッチダーク
-                            bg: '#faf7f2',       // ヨーロッパの上質紙のような温かみのあるオフホワイト
-                            beige: '#f1e6d8'     // 落ち着きのあるニュアンスベージュ
+                            deepred: '#4a030d',  // 熟成された最高級ワインのようなボルドー
+                            red: '#830b1e',      // 情熱のメインレッド
+                            brightred: '#b3152c',// ハイライト
+                            gold: '#c5a059',     // アンティークゴールド
+                            lightgold: '#f0e3ca',// シャンパンベージュの輝き
+                            dark: '#120d0e',     // 漆黒に近いリッチブラック
+                            bg: '#faf7f2',       // ヨーロッパ上質紙のようなオフホワイト
+                            beige: '#f1e6d8'     // ニュアンスベージュ
                         }
                     },
                     fontFamily: {
@@ -57,169 +57,195 @@
         
         /* 画像ズーム用のホバーアニメーション */
         .zoom-img-container img {
-            transition: transform 1.5s cubic-bezier(0.16, 1, 0.3, 1);
+            transition: transform 1.8s cubic-bezier(0.16, 1, 0.3, 1);
         }
         .zoom-img-container:hover img {
-            transform: scale(1.05);
+            transform: scale(1.04);
         }
 
-        /* 雑誌風縦書きレイアウト補助 */
+        /* 縦書きの補助 */
         .vertical-text {
             writing-mode: vertical-rl;
             text-combine-upright: all;
         }
 
-        /* 極細プレミアム境界線 */
+        /* 極細境界線 */
         .premium-border {
-            border-color: rgba(197, 160, 89, 0.25);
+            border-color: rgba(197, 160, 89, 0.2);
         }
 
         /* カスタムスクロールバー */
         ::-webkit-scrollbar {
-            width: 8px;
+            width: 6px;
         }
         ::-webkit-scrollbar-track {
             background: #faf7f2;
         }
         ::-webkit-scrollbar-thumb {
             background: #830b1e;
-            border-radius: 4px;
+            border-radius: 3px;
         }
         ::-webkit-scrollbar-thumb:hover {
             background: #4a030d;
+        }
+
+        /* 画像が読み込まれるまでの美しい骨格フェードイン */
+        .image-loaded {
+            opacity: 1 !important;
+            transform: scale(1) !important;
         }
     </style>
 </head>
 <body class="bg-brand-bg text-brand-dark font-sans overflow-x-hidden selection:bg-brand-red selection:text-white">
 
     <!-- Navigation Header -->
-    <header class="fixed top-0 left-0 w-full z-50 bg-brand-bg/85 backdrop-blur-md border-b premium-border transition-all duration-500">
-        <div class="max-w-7xl mx-auto px-6 md:px-12 py-5 flex justify-between items-center">
+    <header id="main-header" class="fixed top-0 left-0 w-full z-50 bg-brand-bg/90 backdrop-blur-md border-b premium-border transition-all duration-500 py-4 md:py-5">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 md:px-12 flex justify-between items-center">
             <!-- Brand Identity -->
-            <a href="#" class="flex flex-col group">
-                <span class="font-serif text-xl md:text-2xl font-semibold tracking-[0.2em] text-brand-deepred transition-colors duration-300 group-hover:text-brand-red">
+            <a href="#" class="flex flex-col group z-50">
+                <span class="font-serif text-lg md:text-2xl font-semibold tracking-[0.2em] text-brand-deepred transition-colors duration-300 group-hover:text-brand-red">
                     KAZUMIN
                 </span>
-                <span class="font-sans text-[9px] uppercase tracking-[0.3em] text-brand-gold -mt-1 font-medium">
+                <span class="font-sans text-[8px] md:text-[9px] uppercase tracking-[0.3em] text-brand-gold -mt-1 font-medium">
                     MAMA PRESIDENT
                 </span>
             </a>
             
-            <!-- Navigation Links -->
-            <nav class="hidden lg:flex items-center space-x-12 text-xs tracking-[0.25em] uppercase font-medium">
+            <!-- Navigation Links (PC Only) -->
+            <nav class="hidden lg:flex items-center space-x-10 xl:space-x-12 text-[11px] tracking-[0.25em] uppercase font-medium">
                 <a href="#concept" class="text-brand-dark/70 hover:text-brand-red transition-all duration-300 relative py-1 after:absolute after:bottom-0 after:left-0 after:w-0 after:h-[1px] after:bg-brand-red hover:after:w-full after:transition-all after:duration-300">Concept</a>
                 <a href="#values" class="text-brand-dark/70 hover:text-brand-red transition-all duration-300 relative py-1 after:absolute after:bottom-0 after:left-0 after:w-0 after:h-[1px] after:bg-brand-red hover:after:w-full after:transition-all after:duration-300">Philosophy</a>
                 <a href="#activities" class="text-brand-dark/70 hover:text-brand-red transition-all duration-300 relative py-1 after:absolute after:bottom-0 after:left-0 after:w-0 after:h-[1px] after:bg-brand-red hover:after:w-full after:transition-all after:duration-300">Activities</a>
                 <a href="#about" class="text-brand-dark/70 hover:text-brand-red transition-all duration-300 relative py-1 after:absolute after:bottom-0 after:left-0 after:w-0 after:h-[1px] after:bg-brand-red hover:after:w-full after:transition-all after:duration-300">Profile</a>
             </nav>
 
-            <!-- Navigation Button -->
-            <div>
-                <button onclick="openGalleryModal()" class="relative overflow-hidden group border border-brand-red px-6 py-2.5 text-xs tracking-[0.2em] uppercase text-brand-red hover:text-white transition-colors duration-500 rounded-sm">
+            <!-- Navigation Button & Mobile Menu Trigger -->
+            <div class="flex items-center space-x-4">
+                <button onclick="openGalleryModal()" class="relative overflow-hidden group border border-brand-red px-4 md:px-6 py-2 text-[10px] md:text-xs tracking-[0.2em] uppercase text-brand-red hover:text-white transition-colors duration-500 rounded-sm">
                     <span class="absolute inset-0 w-0 bg-brand-red transition-all duration-500 ease-out group-hover:w-full -z-10"></span>
                     <span class="relative z-10 font-semibold font-serif">作品を見る</span>
                 </button>
+                
+                <!-- Hamburger Icon (Mobile/Tablet Only) -->
+                <button onclick="toggleMobileMenu()" class="lg:hidden text-brand-deepred focus:outline-none w-8 h-8 flex flex-col justify-center items-center space-y-1.5 z-50" aria-label="メニュー開閉">
+                    <span id="hamburger-line-1" class="w-6 h-[1.5px] bg-brand-deepred transition-transform duration-300"></span>
+                    <span id="hamburger-line-2" class="w-6 h-[1.5px] bg-brand-deepred transition-opacity duration-300"></span>
+                    <span id="hamburger-line-3" class="w-6 h-[1.5px] bg-brand-deepred transition-transform duration-300"></span>
+                </button>
             </div>
+        </div>
+
+        <!-- Mobile Fullscreen Menu overlay -->
+        <div id="mobile-menu" class="fixed inset-0 bg-brand-bg flex flex-col justify-center items-center opacity-0 pointer-events-none transition-all duration-500 lg:hidden z-40">
+            <nav class="flex flex-col items-center space-y-8 text-sm tracking-[0.3em] uppercase font-serif text-center">
+                <a href="#concept" onclick="toggleMobileMenu()" class="text-brand-deepred hover:text-brand-gold py-2 block transition-colors duration-300">Concept / コンセプト</a>
+                <a href="#values" onclick="toggleMobileMenu()" class="text-brand-deepred hover:text-brand-gold py-2 block transition-colors duration-300">Philosophy / ３つの思想</a>
+                <a href="#activities" onclick="toggleMobileMenu()" class="text-brand-deepred hover:text-brand-gold py-2 block transition-colors duration-300">Activities / 事業領域</a>
+                <a href="#about" onclick="toggleMobileMenu()" class="text-brand-deepred hover:text-brand-gold py-2 block transition-colors duration-300">Profile / プロフィール</a>
+                <button onclick="toggleMobileMenu(); openGalleryModal()" class="mt-4 bg-brand-deepred text-brand-lightgold px-8 py-3 text-xs tracking-[0.2em] uppercase rounded-sm">
+                    作品を見る <i class="fa-solid fa-arrow-right ml-2"></i>
+                </button>
+            </nav>
         </div>
     </header>
 
     <!-- 1. FIRST VIEW (HERO SECTION) -->
-    <section class="relative min-h-screen pt-32 pb-16 flex flex-col justify-between overflow-hidden">
-        <!-- Structural Fine Lines (Editorial Grid Guide) -->
-        <div class="absolute left-[8%] top-0 h-full w-[1px] bg-brand-gold/15 hidden lg:block"></div>
-        <div class="absolute right-[8%] top-0 h-full w-[1px] bg-brand-gold/15 hidden lg:block"></div>
+    <section class="relative min-h-screen pt-24 pb-12 md:py-16 flex flex-col justify-between overflow-hidden">
+        <!-- Structural Editorial Lines (Hidden on mobile) -->
+        <div class="absolute left-[8%] top-0 h-full w-[1px] bg-brand-gold/10 hidden lg:block"></div>
+        <div class="absolute right-[8%] top-0 h-full w-[1px] bg-brand-gold/10 hidden lg:block"></div>
 
-        <div class="max-w-7xl mx-auto w-full px-6 md:px-12 my-auto z-10">
-            <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-8 items-center">
-                
-                <!-- Left Column: Striking Serif Statement -->
-                <div class="lg:col-span-5 flex flex-col justify-center order-2 lg:order-1 pt-4 lg:pt-0">
-                    <div class="space-y-6">
-                        <!-- Sub-Label with gold stars/dots aesthetic -->
-                        <div class="flex items-center space-x-2">
-                            <span class="w-1.5 h-1.5 rounded-full bg-brand-gold"></span>
-                            <span class="font-sans text-xs tracking-[0.3em] uppercase text-brand-gold font-semibold">
-                                Influence ✕ Branding
-                            </span>
-                        </div>
-                        
-                        <!-- Main Japanese Headline -->
-                        <h1 class="font-serif text-4xl md:text-5xl lg:text-6xl text-brand-deepred leading-[1.25] font-light tracking-wider">
-                            自立が、<br class="hidden md:inline" />
-                            いちばん美しい。
-                        </h1>
-                        
-                        <!-- Rich Prose Body -->
-                        <p class="font-serif text-brand-dark/80 text-sm md:text-base leading-relaxed tracking-widest max-w-md pt-4">
-                            誰かの価値観ではなく、自らの内に秘めた美しさと真実を表現すること。<br class="hidden md:inline" />
-                            ありのままの影響力と、磨き抜かれた世界観を手に、しなやかに自立する現代の女性たちへ。
-                        </p>
+        <div class="max-w-7xl mx-auto w-full px-4 sm:px-6 md:px-12 my-auto z-10 grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
+            
+            <!-- Left Column: Striking Serif Statement -->
+            <div class="lg:col-span-5 flex flex-col justify-center order-2 lg:order-1 pt-2 lg:pt-0">
+                <div class="space-y-4 md:space-y-6">
+                    <!-- Brand Subtitle -->
+                    <div class="flex items-center space-x-2">
+                        <span class="w-1.5 h-1.5 rounded-full bg-brand-gold"></span>
+                        <span class="font-sans text-[10px] md:text-xs tracking-[0.3em] uppercase text-brand-gold font-semibold">
+                            Influence ✕ Branding
+                        </span>
+                    </div>
+                    
+                    <!-- Main Japanese Headline -->
+                    <h1 class="font-serif text-3xl sm:text-4xl md:text-5xl lg:text-6xl text-brand-deepred leading-[1.3] font-light tracking-wider">
+                        自立が、<br class="hidden sm:inline" />
+                        いちばん美しい。
+                    </h1>
+                    
+                    <!-- Rich Prose Body -->
+                    <p class="font-serif text-brand-dark/80 text-sm md:text-base leading-relaxed tracking-widest max-w-md pt-2 md:pt-4">
+                        誰かのつくった価値観ではなく、自らの内に秘めた美学と真実を表現すること。<br class="hidden md:inline" />
+                        ありのままの影響力と、磨き抜かれた世界観を手に、しなやかに自立する現代の女性たちへ。
+                    </p>
 
-                        <!-- Owner Seal -->
-                        <div class="flex items-center space-x-4 pt-6">
-                            <div class="w-12 h-[1px] bg-brand-gold"></div>
-                            <div>
-                                <p class="font-serif text-sm tracking-[0.15em] font-medium text-brand-deepred">かずみんママ社長</p>
-                                <p class="font-sans text-[10px] tracking-[0.2em] uppercase text-brand-dark/50 mt-0.5">Brand Director & Activist</p>
-                            </div>
+                    <!-- Owner Sign-off -->
+                    <div class="flex items-center space-x-4 pt-4 md:pt-6">
+                        <div class="w-10 h-[1px] bg-brand-gold"></div>
+                        <div>
+                            <p class="font-serif text-sm tracking-[0.15em] font-semibold text-brand-deepred">かずみんママ社長</p>
+                            <p class="font-sans text-[9px] tracking-[0.2em] uppercase text-brand-dark/50 mt-0.5">Brand Director & Activist</p>
                         </div>
                     </div>
                 </div>
+            </div>
 
-                <!-- Right Column: Premium Hero Image Box -->
-                <div class="lg:col-span-7 flex justify-center items-center order-1 lg:order-2">
-                    <div class="relative w-full max-w-lg aspect-[3/4] bg-brand-beige p-3 md:p-4 shadow-2xl transition-transform duration-700 hover:scale-[1.01]">
-                        <!-- Decorative Frame Boarders -->
-                        <div class="absolute inset-2 border border-brand-gold/35 pointer-events-none"></div>
+            <!-- Right Column: Premium Hero Image Box -->
+            <div class="lg:col-span-7 flex justify-center items-center order-1 lg:order-2">
+                <div class="relative w-full max-w-md lg:max-w-lg aspect-[3/4] bg-brand-beige p-2 sm:p-4 shadow-2xl transition-transform duration-700 hover:scale-[1.01]">
+                    <!-- Decorative Frame Boarders -->
+                    <div class="absolute inset-1.5 sm:inset-2.5 border border-brand-gold/30 pointer-events-none"></div>
+                    
+                    <!-- Editorial Corner Details -->
+                    <div class="absolute top-3 sm:top-5 left-5 sm:left-7 font-playfair text-[9px] tracking-[0.2em] text-brand-gold">EST. 2021</div>
+                    <div class="absolute top-3 sm:top-5 right-5 sm:right-7 font-playfair text-[9px] tracking-[0.2em] text-brand-gold">PORTFOLIO ISSUE</div>
+
+                    <!-- Real Image Container (Now Video) -->
+                    <div class="w-full h-full bg-brand-deepred relative overflow-hidden group zoom-img-container">
+                        <!-- Smooth Overlay -->
+                        <div class="absolute inset-0 bg-gradient-to-t from-brand-deepred/20 via-transparent to-transparent z-10 pointer-events-none"></div>
                         
-                        <!-- Vintage Corner Details -->
-                        <div class="absolute top-4 left-6 font-playfair text-[10px] tracking-[0.2em] text-brand-gold">EST. 2021</div>
-                        <div class="absolute top-4 right-6 font-playfair text-[10px] tracking-[0.2em] text-brand-gold">PORTFOLIO ISSUE</div>
+                        <!-- THE HERO VIDEO WITH CASH BUSTER -->
+                        <video id="hero-video" autoplay loop muted playsinline poster="hero.png" 
+                               class="absolute inset-0 w-full h-full object-cover z-20 transition-all duration-[1.5s] opacity-0"
+                               onloadeddata="this.classList.add('image-loaded'); document.getElementById('hero-img-fallback').style.display='none';">
+                            <source src="hero.mp4?v=2026" type="video/mp4">
+                        </video>
 
-                        <!-- Real Image Container -->
-                        <div class="w-full h-full bg-brand-deepred relative overflow-hidden group zoom-img-container">
-                            <!-- Overlay gradient in case image isn't loaded -->
-                            <div class="absolute inset-0 bg-gradient-to-t from-brand-deepred via-brand-red/40 to-transparent z-10 pointer-events-none mix-blend-multiply"></div>
-                            
-                            <!-- THE HERO IMAGE (Referenced verbatim) -->
-                            <img src="hero.png" alt="かずみんママ社長 ブランドキービジュアル" 
-                                 class="absolute inset-0 w-full h-full object-cover z-20 transition-all duration-1000 opacity-0 transform scale-105"
-                                 onload="this.classList.remove('opacity-0', 'scale-105'); this.classList.add('opacity-100', 'scale-100'); document.getElementById('hero-img-fallback').style.display='none';">
-
-                            <!-- Premium Fallback Board Info -->
-                            <div id="hero-img-fallback" class="absolute inset-0 flex flex-col justify-between p-8 z-10 text-white">
-                                <div></div>
-                                <div class="text-center">
-                                    <i class="fa-regular fa-image text-3xl text-brand-gold/80 mb-2"></i>
-                                    <p class="font-playfair text-sm tracking-widest text-brand-lightgold">"hero.png" Loading...</p>
-                                </div>
-                                <div class="text-xs text-center text-white/50 tracking-widest">KAZUMIN MAMA PRESIDENT</div>
+                        <!-- Fallback Background/Loader -->
+                        <div id="hero-img-fallback" class="absolute inset-0 flex flex-col justify-between p-6 sm:p-8 z-10 text-white bg-brand-deepred/60">
+                            <div></div>
+                            <div class="text-center">
+                                <i class="fa-solid fa-play text-2xl text-brand-gold/80 mb-2 animate-pulse"></i>
+                                <p class="font-playfair text-xs tracking-widest text-brand-lightgold">"hero.mp4" Loading...</p>
                             </div>
+                            <div class="text-[9px] text-center text-white/50 tracking-widest">KAZUMIN MAMA PRESIDENT</div>
                         </div>
+                    </div>
 
-                        <!-- Floating Philosophy Banner (Sits under hero image) -->
-                        <div class="absolute -bottom-6 -left-6 bg-brand-deepred text-brand-lightgold border border-brand-gold/40 px-6 py-4 hidden md:block z-30 shadow-lg">
-                            <span class="block font-playfair italic text-[11px] tracking-widest text-brand-gold">Brand Essence</span>
-                            <span class="block font-serif text-sm tracking-widest font-medium mt-1">「ありのままが、絶対的なブランドになる」</span>
-                        </div>
+                    <!-- Floating Philosophy Ribbon -->
+                    <div class="absolute -bottom-4 -left-4 bg-brand-deepred text-brand-lightgold border border-brand-gold/40 px-5 py-3.5 hidden sm:block z-30 shadow-lg">
+                        <span class="block font-playfair italic text-[10px] tracking-widest text-brand-gold">Brand Essence</span>
+                        <span class="block font-serif text-xs md:text-sm tracking-widest font-medium mt-1">「ありのままが、絶対的なブランドになる」</span>
                     </div>
                 </div>
             </div>
         </div>
 
         <!-- Scroll Indicator and Social Links -->
-        <div class="max-w-7xl mx-auto w-full px-6 md:px-12 flex justify-between items-end mt-12 z-10">
+        <div class="max-w-7xl mx-auto w-full px-4 sm:px-6 md:px-12 flex justify-between items-end mt-8 md:mt-12 z-10">
             <!-- Left Side: Social Icon Handles -->
-            <div class="flex space-x-6 text-xs text-brand-dark/50 font-sans">
-                <a href="#" class="hover:text-brand-red transition-colors duration-300"><i class="fa-brands fa-instagram text-base"></i></a>
-                <a href="#" class="hover:text-brand-red transition-colors duration-300"><i class="fa-brands fa-threads text-base"></i></a>
-                <a href="#" class="hover:text-brand-red transition-colors duration-300"><i class="fa-regular fa-envelope text-base"></i></a>
+            <div class="flex space-x-5 text-brand-dark/50">
+                <a href="#" class="hover:text-brand-red transition-colors duration-300 text-sm"><i class="fa-brands fa-instagram"></i></a>
+                <a href="#" class="hover:text-brand-red transition-colors duration-300 text-sm"><i class="fa-brands fa-threads"></i></a>
+                <a href="#" class="hover:text-brand-red transition-colors duration-300 text-sm"><i class="fa-regular fa-envelope"></i></a>
             </div>
 
             <!-- Right Side: Vertical Scroll Indicator -->
             <a href="#concept" class="flex flex-col items-center group text-brand-dark/50 hover:text-brand-red transition-colors duration-300">
-                <span class="text-[9px] font-sans tracking-[0.3em] uppercase mb-2">Scroll Down</span>
-                <div class="w-[1px] h-14 bg-brand-gold/30 relative overflow-hidden">
+                <span class="text-[8px] font-sans tracking-[0.3em] uppercase mb-1">Scroll Down</span>
+                <div class="w-[1px] h-10 md:h-14 bg-brand-gold/30 relative overflow-hidden">
                     <div class="absolute top-0 left-0 w-full h-1/2 bg-brand-red animate-[bounce_2.5s_infinite]"></div>
                 </div>
             </a>
@@ -227,55 +253,54 @@
     </section>
 
     <!-- 2. CONCEPT SECTION -->
-    <section id="concept" class="relative py-28 md:py-36 bg-brand-bg border-t premium-border overflow-hidden">
-        <!-- Floating Subtle Decorative Background Graphic -->
-        <div class="absolute right-0 top-1/4 w-96 h-96 rounded-full bg-brand-beige/20 -z-10 blur-3xl"></div>
+    <section id="concept" class="relative py-20 md:py-36 bg-brand-bg border-t premium-border overflow-hidden">
+        <!-- Floating Subtle Light Glow -->
+        <div class="absolute right-0 top-1/4 w-72 md:w-96 h-72 md:h-96 rounded-full bg-brand-beige/25 -z-10 blur-3xl"></div>
         
-        <div class="max-w-6xl mx-auto px-6 md:px-12">
-            <div class="grid grid-cols-1 lg:grid-cols-12 gap-16 items-center">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 md:px-12">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 md:gap-16 items-center">
                 
                 <!-- Left Column: The Concept Image Frame -->
                 <div class="lg:col-span-5 reveal-element">
-                    <div class="relative w-full aspect-[4/5] bg-brand-deepred p-3 shadow-xl">
-                        <div class="absolute inset-0 bg-brand-dark/5 mix-blend-color z-10"></div>
-                        <div class="absolute -top-4 -left-4 w-12 h-12 border-t-2 border-l-2 border-brand-gold/60"></div>
-                        <div class="absolute -bottom-4 -right-4 w-12 h-12 border-b-2 border-r-2 border-brand-gold/60"></div>
+                    <div class="relative w-full aspect-[4/5] bg-brand-deepred p-2 md:p-3 shadow-xl">
+                        <div class="absolute -top-3 -left-3 w-10 h-10 border-t border-l border-brand-gold/55"></div>
+                        <div class="absolute -bottom-3 -right-3 w-10 h-10 border-b border-r border-brand-gold/55"></div>
                         
-                        <!-- THE CONCEPT IMAGE (Referenced verbatim) -->
-                        <div class="w-full h-full overflow-hidden zoom-img-container relative">
+                        <!-- THE CONCEPT IMAGE -->
+                        <div class="w-full h-full overflow-hidden zoom-img-container relative bg-brand-deepred">
                             <img src="concept.png" alt="静物コンセプト（KINFOLK、手帳、万年筆）" 
-                                 class="absolute inset-0 w-full h-full object-cover z-20 transition-all duration-1000 opacity-0"
-                                 onload="this.classList.remove('opacity-0'); this.classList.add('opacity-100'); document.getElementById('concept-img-fallback').style.display='none';">
+                                 class="absolute inset-0 w-full h-full object-cover z-20 transition-all duration-[1.5s] opacity-0"
+                                 onload="this.classList.add('image-loaded'); document.getElementById('concept-img-fallback').style.display='none';">
                             
                             <!-- Concept image fallback representation -->
-                            <div id="concept-img-fallback" class="absolute inset-0 flex flex-col justify-center items-center p-6 text-center z-10 text-brand-lightgold">
-                                <span class="font-playfair text-5xl text-brand-gold/30 font-light block mb-2">01</span>
-                                <h4 class="font-serif text-sm tracking-[0.2em] font-semibold mb-2">CONCEPT VISUAL</h4>
-                                <p class="text-[11px] text-brand-lightgold/50 tracking-widest font-serif">"concept.png"</p>
+                            <div id="concept-img-fallback" class="absolute inset-0 flex flex-col justify-center items-center p-4 text-center z-10 text-brand-lightgold bg-brand-deepred/60">
+                                <span class="font-playfair text-4xl text-brand-gold/30 font-light block mb-1">01</span>
+                                <h4 class="font-serif text-xs tracking-[0.2em] font-semibold mb-1">CONCEPT VISUAL</h4>
+                                <p class="text-[9px] text-brand-lightgold/50 tracking-widest font-serif">"concept.png" Loading...</p>
                             </div>
                         </div>
                     </div>
                 </div>
 
                 <!-- Right Column: Narrative Storytelling Copy -->
-                <div class="lg:col-span-7 lg:pl-10 reveal-element">
+                <div class="lg:col-span-7 lg:pl-8 reveal-element">
                     <!-- Concept Section Header -->
-                    <div class="mb-10">
-                        <span class="font-playfair italic text-brand-gold text-lg tracking-[0.25em] block mb-2">The Quiet Passion</span>
-                        <h2 class="font-serif text-2xl md:text-4xl text-brand-deepred font-light tracking-widest leading-[1.3]">
-                            何者でもない私から、<br/>
+                    <div class="mb-6 md:mb-10">
+                        <span class="font-playfair italic text-brand-gold text-base md:text-lg tracking-[0.25em] block mb-1 md:mb-2">The Quiet Passion</span>
+                        <h2 class="font-serif text-xl sm:text-2xl md:text-4xl text-brand-deepred font-light tracking-widest leading-[1.35]">
+                            何者でもない私から、<br class="hidden sm:inline" />
                             私だけのストーリーを紡ぐ。
                         </h2>
                     </div>
 
                     <!-- Story Paragraphs matching the visual mood -->
-                    <div class="space-y-6 font-serif text-brand-dark/85 text-sm md:text-base leading-relaxed tracking-widest">
-                        <p class="border-l-2 border-brand-red pl-5">
-                            朝の柔らかな一筋の光が差し込むテーブル。お気に入りの洋書を重ね、上質なレザーの手帳を開き、ゴールドが美しく輝く万年筆を手に取る。そこには、自らの内なる声と丁寧に向き合う「静寂にして熱烈な情熱」が息づいています。
+                    <div class="space-y-4 md:space-y-6 font-serif text-brand-dark/85 text-xs sm:text-sm md:text-base leading-relaxed tracking-widest">
+                        <p class="border-l-2 border-brand-red pl-4 md:pl-5">
+                            朝の柔らかな一筋の光が差し込むテーブル。そこには、お気に入りの洋書を重ね、上質なボルドーレザーの手帳をそっと開き、ゴールドが静かに輝く万年筆を手にする「静寂にして熱烈な情熱」が息づいています。
                         </p>
                         <p>
-                            自立とは、孤独に荒波を越えることではありません。
-                            それは、「自分の大切な美意識と言葉を信じ、それを堂々と体現し、共鳴する人々としなやかに繋がっていくこと」だと確信しています。
+                            女性の自立とは、孤独に荒波を越えることではありません。
+                            それは、「自分自身の大切な美意識と言葉を信じ、それを堂々と体現し、共鳴する人々としなやかに繋がっていくこと」だと確信しています。
                         </p>
                         <p>
                             家族を愛し、主婦という日々を愛しながらも、一人の女性として自分の名前で生きる。その決意を胸に歩んだからこそ見えた、本質的な世界観構築の方法。
@@ -284,11 +309,11 @@
                     </div>
 
                     <!-- Signed Quote Section -->
-                    <div class="mt-10 bg-brand-beige/40 p-6 border-l-4 border-brand-red">
+                    <div class="mt-8 md:mt-10 bg-brand-beige/30 p-4 sm:p-6 border-l-4 border-brand-red">
                         <p class="font-serif text-xs md:text-sm text-brand-deepred italic tracking-widest leading-relaxed">
                             「ママだから、女性だから、という背景こそが最高のインスピレーション。私たちは自らのストーリーをもって、唯一無二のブランドへと昇華する。」
                         </p>
-                        <span class="block text-right font-sans text-[10px] tracking-widest uppercase text-brand-gold font-bold mt-3">— KAZUMIN</span>
+                        <span class="block text-right font-sans text-[10px] tracking-widest uppercase text-brand-gold font-bold mt-2.5">— KAZUMIN</span>
                     </div>
                 </div>
 
@@ -297,71 +322,71 @@
     </section>
 
     <!-- 3. VALUES (THE PHILOSOPHY) -->
-    <section id="values" class="relative py-28 md:py-36 bg-brand-dark text-white overflow-hidden">
+    <section id="values" class="relative py-20 md:py-36 bg-brand-dark text-white overflow-hidden">
         <!-- Deep Red Atmosphere Gradient -->
-        <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[120%] h-[120%] bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-brand-deepred/30 via-transparent to-transparent pointer-events-none -z-10"></div>
+        <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[120%] h-[120%] bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-brand-deepred/25 via-transparent to-transparent pointer-events-none -z-10"></div>
 
-        <div class="max-w-7xl mx-auto px-6 md:px-12 relative z-10">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 md:px-12 relative z-10">
             
             <!-- Section Header Centered -->
-            <div class="text-center max-w-2xl mx-auto mb-20 reveal-element">
-                <span class="font-playfair italic text-brand-gold text-lg tracking-[0.2em] block mb-2">Our Philosophy</span>
-                <h2 class="font-serif text-3xl md:text-4xl font-light tracking-widest text-white leading-tight">
+            <div class="text-center max-w-2xl mx-auto mb-12 md:mb-20 reveal-element">
+                <span class="font-playfair italic text-brand-gold text-base md:text-lg tracking-[0.2em] block mb-1">Our Philosophy</span>
+                <h2 class="font-serif text-2xl md:text-4xl font-light tracking-widest text-white leading-tight">
                     選ばれ続ける、３つの思想
                 </h2>
-                <div class="w-16 h-[1px] bg-brand-gold mx-auto mt-6"></div>
+                <div class="w-12 h-[1px] bg-brand-gold mx-auto mt-4 md:mt-6"></div>
             </div>
 
             <!-- Value Grid (3 Columns) -->
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 lg:gap-12">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-10">
                 
                 <!-- Value Card 1 -->
-                <div class="group relative bg-white/[0.02] border border-white/10 hover:border-brand-gold/60 p-8 md:p-10 transition-all duration-500 rounded-sm reveal-element">
-                    <div class="flex justify-between items-center mb-12">
-                        <span class="font-playfair text-3xl text-brand-gold font-light group-hover:scale-110 transition-transform duration-500">I</span>
-                        <div class="h-[1px] w-12 bg-white/20 group-hover:w-16 transition-all duration-500"></div>
+                <div class="group relative bg-white/[0.02] border border-white/10 hover:border-brand-gold/50 p-6 sm:p-8 lg:p-10 transition-all duration-500 rounded-sm reveal-element">
+                    <div class="flex justify-between items-center mb-8 md:mb-12">
+                        <span class="font-playfair text-2xl md:text-3xl text-brand-gold font-light group-hover:scale-105 transition-transform duration-500">I</span>
+                        <div class="h-[1px] w-10 bg-white/10 group-hover:w-14 transition-all duration-500"></div>
                     </div>
-                    <h3 class="font-serif text-lg md:text-xl font-medium tracking-widest text-white mb-4 group-hover:text-brand-lightgold transition-colors duration-300">
+                    <h3 class="font-serif text-base sm:text-lg md:text-xl font-medium tracking-widest text-white mb-3 group-hover:text-brand-lightgold transition-colors duration-300">
                         影響力の本質設計
                     </h3>
-                    <p class="font-serif text-white/70 text-xs md:text-sm leading-relaxed tracking-wider">
+                    <p class="font-serif text-white/70 text-xs sm:text-sm leading-relaxed tracking-wider">
                         声高にアピールするのではなく、静かな共感を呼ぶ美しさを。トレンドに左右されない「確かな存在感」と、深く信頼されるための影響力の種を育てます。
                     </p>
-                    <div class="mt-8 text-brand-gold text-[10px] font-sans tracking-[0.2em] uppercase opacity-0 group-hover:opacity-100 transition-opacity duration-500">
+                    <div class="mt-6 md:mt-8 text-brand-gold text-[9px] font-sans tracking-[0.2em] uppercase opacity-0 group-hover:opacity-100 transition-opacity duration-500">
                         Truth of Influence
                     </div>
                 </div>
 
                 <!-- Value Card 2 -->
-                <div class="group relative bg-white/[0.02] border border-white/10 hover:border-brand-gold/60 p-8 md:p-10 transition-all duration-500 rounded-sm reveal-element" style="transition-delay: 150ms;">
-                    <div class="flex justify-between items-center mb-12">
-                        <span class="font-playfair text-3xl text-brand-gold font-light group-hover:scale-110 transition-transform duration-500">II</span>
-                        <div class="h-[1px] w-12 bg-white/20 group-hover:w-16 transition-all duration-500"></div>
+                <div class="group relative bg-white/[0.02] border border-white/10 hover:border-brand-gold/50 p-6 sm:p-8 lg:p-10 transition-all duration-500 rounded-sm reveal-element" style="transition-delay: 100ms;">
+                    <div class="flex justify-between items-center mb-8 md:mb-12">
+                        <span class="font-playfair text-2xl md:text-3xl text-brand-gold font-light group-hover:scale-105 transition-transform duration-500">II</span>
+                        <div class="h-[1px] w-10 bg-white/10 group-hover:w-14 transition-all duration-500"></div>
                     </div>
-                    <h3 class="font-serif text-lg md:text-xl font-medium tracking-widest text-white mb-4 group-hover:text-brand-lightgold transition-colors duration-300">
+                    <h3 class="font-serif text-base sm:text-lg md:text-xl font-medium tracking-widest text-white mb-3 group-hover:text-brand-lightgold transition-colors duration-300">
                         美意識あるブランディング
                     </h3>
-                    <p class="font-serif text-white/70 text-xs md:text-sm leading-relaxed tracking-wider">
+                    <p class="font-serif text-white/70 text-xs sm:text-sm leading-relaxed tracking-wider">
                         あなたの歩んできたすべての背景、そして弱ささえも、ひとつの「完璧なアートワーク」として編集し、競合のいない絶対的な価値に変えます。
                     </p>
-                    <div class="mt-8 text-brand-gold text-[10px] font-sans tracking-[0.2em] uppercase opacity-0 group-hover:opacity-100 transition-opacity duration-500">
+                    <div class="mt-6 md:mt-8 text-brand-gold text-[9px] font-sans tracking-[0.2em] uppercase opacity-0 group-hover:opacity-100 transition-opacity duration-500">
                         Aesthetics first
                     </div>
                 </div>
 
                 <!-- Value Card 3 -->
-                <div class="group relative bg-white/[0.02] border border-white/10 hover:border-brand-gold/60 p-8 md:p-10 transition-all duration-500 rounded-sm reveal-element" style="transition-delay: 300ms;">
-                    <div class="flex justify-between items-center mb-12">
-                        <span class="font-playfair text-3xl text-brand-gold font-light group-hover:scale-110 transition-transform duration-500">III</span>
-                        <div class="h-[1px] w-12 bg-white/20 group-hover:w-16 transition-all duration-500"></div>
+                <div class="group relative bg-white/[0.02] border border-white/10 hover:border-brand-gold/50 p-6 sm:p-8 lg:p-10 transition-all duration-500 rounded-sm reveal-element" style="transition-delay: 200ms;">
+                    <div class="flex justify-between items-center mb-8 md:mb-12">
+                        <span class="font-playfair text-2xl md:text-3xl text-brand-gold font-light group-hover:scale-105 transition-transform duration-500">III</span>
+                        <div class="h-[1px] w-10 bg-white/10 group-hover:w-14 transition-all duration-500"></div>
                     </div>
-                    <h3 class="font-serif text-lg md:text-xl font-medium tracking-widest text-white mb-4 group-hover:text-brand-lightgold transition-colors duration-300">
+                    <h3 class="font-serif text-base sm:text-lg md:text-xl font-medium tracking-widest text-white mb-3 group-hover:text-brand-lightgold transition-colors duration-300">
                         しなやかな「経済的自立」
                     </h3>
-                    <p class="font-serif text-white/70 text-xs md:text-sm leading-relaxed tracking-wider">
-                        誰かのための自己犠牲から卒業し、自分の情熱に誇りを持つ。精神的にも経済的にも満たされる、女性起業家としてのビジネスモデルを築きます。
+                    <p class="font-serif text-white/70 text-xs sm:text-sm leading-relaxed tracking-wider">
+                        誰かのための自己犠牲から卒業し、自分の情熱に誇りを持つ。精神的にも経済的にも満たされる、女性起業家としての持続的なビジネスモデルを築きます。
                     </p>
-                    <div class="mt-8 text-brand-gold text-[10px] font-sans tracking-[0.2em] uppercase opacity-0 group-hover:opacity-100 transition-opacity duration-500">
+                    <div class="mt-6 md:mt-8 text-brand-gold text-[9px] font-sans tracking-[0.2em] uppercase opacity-0 group-hover:opacity-100 transition-opacity duration-500">
                         Empowered Independence
                     </div>
                 </div>
@@ -371,53 +396,52 @@
     </section>
 
     <!-- 4. ACTIVITIES (THE WORKS & PROJECTS) -->
-    <section id="activities" class="relative py-28 md:py-36 bg-brand-bg">
-        <div class="max-w-7xl mx-auto px-6 md:px-12">
+    <section id="activities" class="relative py-20 md:py-36 bg-brand-bg">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 md:px-12">
             
             <!-- Section Header -->
-            <div class="flex flex-col md:flex-row md:justify-between md:items-end mb-20 border-b premium-border pb-10 reveal-element">
+            <div class="flex flex-col md:flex-row md:justify-between md:items-end mb-12 md:mb-20 border-b premium-border pb-6 md:pb-10 reveal-element">
                 <div>
-                    <span class="font-playfair italic text-brand-red text-lg tracking-[0.2em] block mb-1">Our Deliverables</span>
-                    <h2 class="font-serif text-2xl md:text-4xl text-brand-deepred font-light tracking-widest">
+                    <span class="font-playfair italic text-brand-red text-base md:text-lg tracking-[0.2em] block mb-1">Our Deliverables</span>
+                    <h2 class="font-serif text-xl sm:text-2xl md:text-4xl text-brand-deepred font-light tracking-widest">
                         紡ぎだす、美しき影響力
                     </h2>
                 </div>
-                <p class="font-serif text-brand-dark/60 text-xs md:text-sm tracking-widest mt-4 md:mt-0 max-w-md">
-                    かずみんママ社長が主宰する、あなたの世界観を完全なる価値に変える3つのソリューション。
+                <p class="font-serif text-brand-dark/60 text-xs sm:text-sm tracking-widest mt-4 md:mt-0 max-w-md">
+                    かずみんママ社長が主宰する、あなたの世界観を完全なる価値に変える3つのプレミアムソリューション。
                 </p>
             </div>
 
             <!-- Alternating Creative Project Grid -->
-            <div class="space-y-28">
+            <div class="space-y-16 md:space-y-28">
                 
                 <!-- Activity 1: Academy -->
-                <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center reveal-element">
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center reveal-element">
                     <!-- Image Showcase -->
                     <div class="lg:col-span-6 relative aspect-[16/10] bg-brand-deepred overflow-hidden group shadow-lg">
                         <img src="activity1.png" alt="影響力ブランディング・アカデミー（テラゾー、バラ、MacBook）" 
-                             class="absolute inset-0 w-full h-full object-cover z-20 transition-all duration-1000 opacity-0 transform scale-102 group-hover:scale-100"
-                             onload="this.classList.remove('opacity-0', 'scale-102'); this.classList.add('opacity-100', 'scale-100'); document.getElementById('act1-fallback').style.display='none';">
+                             class="absolute inset-0 w-full h-full object-cover z-20 transition-all duration-[1.5s] opacity-0 transform scale-102 group-hover:scale-100"
+                             onload="this.classList.add('image-loaded'); document.getElementById('act1-fallback').style.display='none';">
 
-                        <div id="act1-fallback" class="absolute inset-0 flex flex-col justify-between p-8 z-10 text-white/80 bg-brand-deepred/40">
+                        <div id="act1-fallback" class="absolute inset-0 flex flex-col justify-between p-6 z-10 text-white/80 bg-brand-deepred/60">
                             <span class="font-sans text-xs tracking-widest uppercase text-brand-gold">Academy Workspace</span>
                             <div class="text-center my-auto">
-                                <i class="fa-solid fa-graduation-cap text-3xl text-brand-gold/80 mb-2"></i>
-                                <p class="font-playfair italic text-[13px] tracking-widest text-brand-lightgold">"activity1.png"</p>
+                                <i class="fa-solid fa-graduation-cap text-2xl text-brand-gold/80 mb-1"></i>
+                                <p class="font-playfair italic text-xs tracking-widest text-brand-lightgold">"activity1.png" Loading...</p>
                             </div>
-                            <span class="text-[9px] tracking-widest uppercase">BRAND STRATEGY LECTURE</span>
+                            <span class="text-[8px] tracking-widest uppercase">BRAND STRATEGY LECTURE</span>
                         </div>
-                        <div class="absolute inset-0 bg-brand-dark/10 opacity-100 group-hover:opacity-0 transition-opacity duration-500 z-10 pointer-events-none"></div>
                     </div>
                     <!-- Narrative Text -->
-                    <div class="lg:col-span-6 lg:pl-10">
-                        <span class="text-xs font-sans text-brand-gold tracking-[0.25em] uppercase font-bold block mb-2">Category 01 — Academy</span>
-                        <h3 class="font-serif text-xl md:text-2xl text-brand-deepred font-medium tracking-wider mb-4">
+                    <div class="lg:col-span-6 lg:pl-6">
+                        <span class="text-[10px] md:text-xs font-sans text-brand-gold tracking-[0.25em] uppercase font-bold block mb-2">Category 01 — Academy</span>
+                        <h3 class="font-serif text-lg md:text-2xl text-brand-deepred font-medium tracking-wider mb-3">
                             影響力ブランディング・アカデミー
                         </h3>
-                        <p class="font-serif text-brand-dark/80 text-sm leading-relaxed tracking-widest mb-6">
-                            ノートPCの画面を覗き込み、一輪のバラとアンティークゴールドの小物に彩られたワークスペースから発信を。美しく紡がれた「世界観」と、確実に心を捉える「SNS発信戦略」を統合したフラッグシップ講座。ただの技術提供を超え、自らの人生のストーリーを誇り高いブランドへ成長させます。
+                        <p class="font-serif text-brand-dark/80 text-xs sm:text-sm leading-relaxed tracking-widest mb-4">
+                            ノートPCの画面に映る「BRAND STRATEGY」のスライド、そして一輪の深紅のバラ。上質で無駄のないテラゾーテーブルでの発信は、あなた自身の美しさとインスピレーションを物語ります。「洗練された世界観発信」と「心を捉えるSNS構築」を統合したフラッグシップ講座。単なるスキル習得を超え、自らの人生を誇り高いブランドへと成長させます。
                         </p>
-                        <div class="flex items-center space-x-3 text-brand-red font-serif text-xs tracking-widest border-t premium-border pt-4">
+                        <div class="flex flex-wrap gap-2 items-center text-brand-red font-serif text-[10px] md:text-xs tracking-widest border-t premium-border pt-4">
                             <span>主宰：かずみんママ社長</span>
                             <span class="text-brand-gold">•</span>
                             <span>完全審査制 / 年4回開講</span>
@@ -426,33 +450,32 @@
                 </div>
 
                 <!-- Activity 2: Inner Circle -->
-                <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center reveal-element">
-                    <!-- Image Showcase (Order switched for desktop) -->
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center reveal-element">
+                    <!-- Image Showcase (Desktop order flipped) -->
                     <div class="lg:col-span-6 lg:order-2 relative aspect-[16/10] bg-brand-deepred overflow-hidden group shadow-lg">
                         <img src="activity2.png" alt="プレミアム・インナーサークル（シャンパン、陶磁器、談笑）" 
-                             class="absolute inset-0 w-full h-full object-cover z-20 transition-all duration-1000 opacity-0 transform scale-102 group-hover:scale-100"
-                             onload="this.classList.remove('opacity-0', 'scale-102'); this.classList.add('opacity-100', 'scale-100'); document.getElementById('act2-fallback').style.display='none';">
+                             class="absolute inset-0 w-full h-full object-cover z-20 transition-all duration-[1.5s] opacity-0 transform scale-102 group-hover:scale-100"
+                             onload="this.classList.add('image-loaded'); document.getElementById('act2-fallback').style.display='none';">
 
-                        <div id="act2-fallback" class="absolute inset-0 flex flex-col justify-between p-8 z-10 text-white/80 bg-brand-deepred/40">
+                        <div id="act2-fallback" class="absolute inset-0 flex flex-col justify-between p-6 z-10 text-white/80 bg-brand-deepred/60">
                             <span class="font-sans text-xs tracking-widest uppercase text-brand-gold">VIP Social Club</span>
                             <div class="text-center my-auto">
-                                <i class="fa-solid fa-users text-3xl text-brand-gold/80 mb-2"></i>
-                                <p class="font-playfair italic text-[13px] tracking-widest text-brand-lightgold">"activity2.png"</p>
+                                <i class="fa-solid fa-users text-2xl text-brand-gold/80 mb-1"></i>
+                                <p class="font-playfair italic text-xs tracking-widest text-brand-lightgold">"activity2.png" Loading...</p>
                             </div>
-                            <span class="text-[9px] tracking-widest uppercase">EXCLUSIVE COMMUNITY</span>
+                            <span class="text-[8px] tracking-widest uppercase">EXCLUSIVE COMMUNITY</span>
                         </div>
-                        <div class="absolute inset-0 bg-brand-dark/10 opacity-100 group-hover:opacity-0 transition-opacity duration-500 z-10 pointer-events-none"></div>
                     </div>
                     <!-- Narrative Text -->
-                    <div class="lg:col-span-6 lg:order-1 lg:pr-10">
-                        <span class="text-xs font-sans text-brand-gold tracking-[0.25em] uppercase font-bold block mb-2">Category 02 — Community</span>
-                        <h3 class="font-serif text-xl md:text-2xl text-brand-deepred font-medium tracking-wider mb-4">
+                    <div class="lg:col-span-6 lg:order-1 lg:pr-6">
+                        <span class="text-[10px] md:text-xs font-sans text-brand-gold tracking-[0.25em] uppercase font-bold block mb-2">Category 02 — Community</span>
+                        <h3 class="font-serif text-lg md:text-2xl text-brand-deepred font-medium tracking-wider mb-3">
                             プレミアム・インナーサークル
                         </h3>
-                        <p class="font-serif text-brand-dark/80 text-sm leading-relaxed tracking-widest mb-6">
-                            シャンパングラスが澄んだ音を立て、繊細な陶磁器を愛でながら、最高峰の仲間たちと語り合う。クローズドだからこそ共有できる、現代の起業・ブランディングのリアルな知見と、互いの美学を高め合うサークル。非日常リトリートやラグジュアリーな社交空間を提供します。
+                        <p class="font-serif text-brand-dark/80 text-xs sm:text-sm leading-relaxed tracking-widest mb-4">
+                            漆黒の大理石テーブルに置かれたクリスタルのシャンパングラス、繊細な金縁が施された美しい陶磁器。高い志を持つ仲間たちが、贅沢な空間で深い知見を共有し、互いの美学を高め合うクローズド・サークル。ラグジュアリーな社交、非日常リトリート、他では手に入らない現代の最先端ビジネストレンドを提供します。
                         </p>
-                        <div class="flex items-center space-x-3 text-brand-red font-serif text-xs tracking-widest border-t premium-border pt-4">
+                        <div class="flex flex-wrap gap-2 items-center text-brand-red font-serif text-[10px] md:text-xs tracking-widest border-t premium-border pt-4">
                             <span>VIP限定サロンセッション</span>
                             <span class="text-brand-gold">•</span>
                             <span>招待制メンバーシップ</span>
@@ -461,33 +484,32 @@
                 </div>
 
                 <!-- Activity 3: Private Produce -->
-                <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center reveal-element">
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center reveal-element">
                     <!-- Image Showcase -->
                     <div class="lg:col-span-6 relative aspect-[16/10] bg-brand-deepred overflow-hidden group shadow-lg">
                         <img src="activity3.png" alt="個別ブランディングプロデュース（ボトル、生地サンプル、サロン）" 
-                             class="absolute inset-0 w-full h-full object-cover z-20 transition-all duration-1000 opacity-0 transform scale-102 group-hover:scale-100"
-                             onload="this.classList.remove('opacity-0', 'scale-102'); this.classList.add('opacity-100', 'scale-100'); document.getElementById('act3-fallback').style.display='none';">
+                             class="absolute inset-0 w-full h-full object-cover z-20 transition-all duration-[1.5s] opacity-0 transform scale-102 group-hover:scale-100"
+                             onload="this.classList.add('image-loaded'); document.getElementById('act3-fallback').style.display='none';">
 
-                        <div id="act3-fallback" class="absolute inset-0 flex flex-col justify-between p-8 z-10 text-white/80 bg-brand-deepred/40">
+                        <div id="act3-fallback" class="absolute inset-0 flex flex-col justify-between p-6 z-10 text-white/80 bg-brand-deepred/60">
                             <span class="font-sans text-xs tracking-widest uppercase text-brand-gold">Private Consultation</span>
                             <div class="text-center my-auto">
-                                <i class="fa-solid fa-gem text-3xl text-brand-gold/80 mb-2"></i>
-                                <p class="font-playfair italic text-[13px] tracking-widest text-brand-lightgold">"activity3.png"</p>
+                                <i class="fa-solid fa-gem text-2xl text-brand-gold/80 mb-1"></i>
+                                <p class="font-playfair italic text-xs tracking-widest text-brand-lightgold">"activity3.png" Loading...</p>
                             </div>
-                            <span class="text-[9px] tracking-widest uppercase">BESPOKE ART DIRECTION</span>
+                            <span class="text-[8px] tracking-widest uppercase">BESPOKE ART DIRECTION</span>
                         </div>
-                        <div class="absolute inset-0 bg-brand-dark/10 opacity-100 group-hover:opacity-0 transition-opacity duration-500 z-10 pointer-events-none"></div>
                     </div>
                     <!-- Narrative Text -->
-                    <div class="lg:col-span-6 lg:pl-10">
-                        <span class="text-xs font-sans text-brand-gold tracking-[0.25em] uppercase font-bold block mb-2">Category 03 — Art Direction</span>
-                        <h3 class="font-serif text-xl md:text-2xl text-brand-deepred font-medium tracking-wider mb-4">
+                    <div class="lg:col-span-6 lg:pl-6">
+                        <span class="text-[10px] md:text-xs font-sans text-brand-gold tracking-[0.25em] uppercase font-bold block mb-2">Category 03 — Art Direction</span>
+                        <h3 class="font-serif text-lg md:text-2xl text-brand-deepred font-medium tracking-wider mb-3">
                             完全個別 ブランディングプロデュース
                         </h3>
-                        <p class="font-serif text-brand-dark/80 text-sm leading-relaxed tracking-widest mb-6">
-                            ガラスのテーブルに整列された深紅の最高級フレグランス、ファブリックの触感、洗練されたカラーサンプルの数々。あなたという人間の生き様そのものを抽出し、息を呑むようなビジュアルとストーリーへ落とし込む、完全マンツーマンのビスポーク・ディレクション。
+                        <p class="font-serif text-brand-dark/80 text-xs sm:text-sm leading-relaxed tracking-widest mb-4">
+                            テーブルに配された深紅の「Maison Francis Kurkdjian」フレグランス、肌触りを確かめるファブリックの触感、細かな色合いを確かめるアートボード。あなたという女性の生き様すべてを抽出し、息を呑むようなビジュアルとストーリーへ落とし込む、完全プライベートなビスポーク・ディレクション。
                         </p>
-                        <div class="flex items-center space-x-3 text-brand-red font-serif text-xs tracking-widest border-t premium-border pt-4">
+                        <div class="flex flex-wrap gap-2 items-center text-brand-red font-serif text-[10px] md:text-xs tracking-widest border-t premium-border pt-4">
                             <span>年間数名枠限定</span>
                             <span class="text-brand-gold">•</span>
                             <span>個別オーダーメイド制作</span>
@@ -500,49 +522,49 @@
     </section>
 
     <!-- 5. ABOUT SECTION (PROFILE) -->
-    <section id="about" class="relative py-28 md:py-36 bg-brand-beige/35">
-        <div class="max-w-6xl mx-auto px-6 md:px-12">
-            <div class="grid grid-cols-1 lg:grid-cols-12 gap-16 items-center">
+    <section id="about" class="relative py-20 md:py-36 bg-brand-beige/25 border-t border-b premium-border">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 md:px-12">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 md:gap-16 items-center">
                 
                 <!-- Left Column: Biography -->
-                <div class="lg:col-span-7 reveal-element">
-                    <span class="font-playfair italic text-brand-gold text-lg tracking-[0.2em] block mb-2">Biography</span>
-                    <h2 class="font-serif text-2xl md:text-4xl text-brand-deepred font-light tracking-widest mb-8">
+                <div class="lg:col-span-7 reveal-element order-2 lg:order-1">
+                    <span class="font-playfair italic text-brand-gold text-base md:text-lg tracking-[0.2em] block mb-1">Biography</span>
+                    <h2 class="font-serif text-2xl md:text-4xl text-brand-deepred font-light tracking-widest mb-6 md:mb-8">
                         かずみんママ社長
                     </h2>
                     
-                    <div class="space-y-6 font-serif text-brand-dark/85 text-xs md:text-sm leading-relaxed tracking-widest">
+                    <div class="space-y-4 md:space-y-6 font-serif text-brand-dark/85 text-xs sm:text-sm md:text-base leading-relaxed tracking-widest">
                         <p class="font-semibold text-brand-red">
                             世界観ブランディングプロデューサー。
                         </p>
                         <p>
-                            二人の子どもを育てながら、何一つ妥協することなく、自分の名前でビジネスを拡大し、年商数億を誇るブランドを育て上げた女性起業家。
+                            二人の子どもを育てながら、自らの美意識を1ミリも妥協することなく、自分の名前でビジネスを拡大し、年商規模の女性起業家。
                         </p>
                         <p>
-                            かつては「家庭を優先し、自分のすべてを後回しにする」典型的な専業主婦期間を過ごした経験を持つ。その中で葛藤を抱えつつも、自己ブランディングと人の心を震わせる世界観発信アプローチを独学で開発。
+                            かつては「家庭を最優先し、自分のすべてを後回しにする」葛藤の専業主婦期間を過ごす。その日々の中で、ノートと手帳を開き、自らの心の声と深く向き合うプロセスから、感情に語りかける独自の「世界観構築メソッド」を独学で開発。
                         </p>
                         <p>
-                            「すべての女性に、人生の真の創造主（クリエイター）になる力がある」という強烈な信念のもと、一時的なノウハウに終始しない「本質なアートディレクションと価値設計」を確立。これまでに500名以上の経営者、クリエイター、インフルエンサーのブランドをデザインし、精神的・経済的自立へと導く。
+                            「すべての女性に、人生の真の創造主（クリエイター）になる力がある」という強烈な信念のもと、一時的なノウハウに終始しない「本質なアートディレクションと価値設計」を確立。これまでに500名以上の経営者、クリエイター、主婦の自立をデザインし、精神的・経済的自由へと導く。
                         </p>
                     </div>
-                </div>
-
-                <!-- Right Column: Profile Image styled beautifully -->
-                <div class="lg:col-span-5 reveal-element">
-                    <div class="relative w-full aspect-[4/5] bg-brand-deepred p-4 border border-brand-gold/60 shadow-2xl">
-                        <!-- THE PROFILE IMAGE (Referenced verbatim) -->
+                <!-- Right Column: Profile Image styled beautifully (Now Profile Video) -->
+                <div class="lg:col-span-5 reveal-element order-1 lg:order-2">
+                    <div class="relative w-full max-w-sm mx-auto aspect-[4/5] bg-brand-deepred p-3 border border-brand-gold/40 shadow-2xl">
+                        <!-- THE PROFILE VIDEO WITH CASH BUSTER -->
                         <div class="w-full h-full overflow-hidden zoom-img-container relative bg-brand-deepred">
-                            <img src="profile.png" alt="かずみんママ社長（ライブラリー、カシミア）" 
-                                 class="absolute inset-0 w-full h-full object-cover z-20 transition-all duration-1000 opacity-0"
-                                 onload="this.classList.remove('opacity-0'); this.classList.add('opacity-100'); document.getElementById('profile-img-fallback').style.display='none';">
+                            <video id="profile-video" autoplay loop muted playsinline poster="profile.png" 
+                                   class="absolute inset-0 w-full h-full object-cover z-20 transition-all duration-[1.5s] opacity-0"
+                                   onloadeddata="this.classList.add('image-loaded'); document.getElementById('profile-img-fallback').style.display='none';">
+                                <source src="profile.mp4?v=2026" type="video/mp4">
+                            </video>
 
                             <!-- Fallback UI Info -->
-                            <div id="profile-img-fallback" class="absolute inset-0 flex flex-col justify-between p-6 text-white z-10 bg-brand-deepred/50">
-                                <span class="font-sans text-[10px] tracking-widest uppercase text-brand-gold font-bold">Profile Scene</span>
+                            <div id="profile-img-fallback" class="absolute inset-0 flex flex-col justify-between p-6 text-white z-10 bg-brand-deepred/60">
+                                <span class="font-sans text-[9px] tracking-widest uppercase text-brand-gold font-bold">Profile Scene</span>
                                 <div class="text-center my-auto">
-                                    <span class="font-serif text-xl font-light tracking-widest text-brand-lightgold">「ありのままを価値に」</span>
+                                    <span class="font-serif text-base font-light tracking-widest text-brand-lightgold">「ありのままを価値に」</span>
                                 </div>
-                                <span class="text-[9px] tracking-widest font-sans opacity-50">"profile.png"</span>
+                                <span class="text-[8px] tracking-widest font-sans opacity-50">"profile.mp4" Loading...</span>
                             </div>
                         </div>
                     </div>
@@ -553,78 +575,78 @@
     </section>
 
     <!-- 6. CTA SECTION & LEAD ROUTING -->
-    <section class="relative py-32 md:py-40 bg-brand-deepred text-white overflow-hidden text-center">
-        <!-- Overlay Texture -->
-        <div class="absolute inset-0 bg-cover bg-center mix-blend-overlay opacity-15 pointer-events-none" style="background-image: radial-gradient(circle, #000 65%, transparent 100%);"></div>
-        <div class="absolute left-1/2 -translate-x-1/2 top-0 w-[1px] h-24 bg-brand-gold/40"></div>
+    <section class="relative py-24 md:py-40 bg-brand-deepred text-white overflow-hidden text-center">
+        <!-- Overlay Subtle Radial Texture -->
+        <div class="absolute inset-0 bg-cover bg-center mix-blend-overlay opacity-15 pointer-events-none" style="background-image: radial-gradient(circle, #000 60%, transparent 100%);"></div>
+        <div class="absolute left-1/2 -translate-x-1/2 top-0 w-[1px] h-16 md:h-24 bg-brand-gold/30"></div>
 
-        <div class="max-w-4xl mx-auto px-6 md:px-12 relative z-10">
-            <span class="font-sans text-xs tracking-[0.4em] uppercase text-brand-gold font-bold block mb-4">Ascend to your ultimate brand</span>
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 md:px-12 relative z-10">
+            <span class="font-sans text-[10px] md:text-xs tracking-[0.4em] uppercase text-brand-gold font-bold block mb-3 md:mb-4">Ascend to your ultimate brand</span>
             
-            <h2 class="font-serif text-3xl md:text-5xl font-light tracking-widest text-white leading-tight mb-8">
-                あなたの世界観を、<br class="md:hidden" />
+            <h2 class="font-serif text-2xl sm:text-3xl md:text-5xl font-light tracking-widest text-white leading-snug mb-6 md:mb-8">
+                あなたの世界観を、<br class="sm:hidden" />
                 世界に誇る一作へ。
             </h2>
             
-            <p class="font-serif text-brand-lightgold/85 text-xs md:text-sm tracking-widest leading-relaxed max-w-lg mx-auto mb-14">
-                磨き上げられたディテール、確かな意志、そして人々の感情を動かす演出。<br/>
-                唯一無二の影響力を持った自立のストーリーを、ここから共に書き換えましょう。
+            <p class="font-serif text-brand-lightgold/85 text-xs sm:text-sm tracking-widest leading-relaxed max-w-lg mx-auto mb-10 md:mb-14">
+                磨き上げられたディテール、確かな意志、そして人々の感情を動かす演出。<br class="hidden sm:inline" />
+                唯一無二の影響力を持った「自立のストーリー」を、ここから共に紡ぎましょう。
             </p>
 
-            <!-- Major Actions -->
-            <div class="flex flex-col sm:flex-row justify-center items-center gap-6 max-w-lg mx-auto">
+            <!-- Major Actions (Responsive Flow) -->
+            <div class="flex flex-col sm:flex-row justify-center items-center gap-4 sm:gap-6 max-w-md md:max-w-lg mx-auto">
                 <!-- Main Button (CTA: 作品を見る) -->
-                <button onclick="openGalleryModal()" class="w-full sm:w-auto bg-brand-gold hover:bg-brand-lightgold text-brand-deepred px-10 py-5 text-sm font-semibold tracking-[0.25em] uppercase transition-all duration-300 shadow-xl flex items-center justify-center space-x-3 group rounded-sm">
+                <button onclick="openGalleryModal()" class="w-full sm:w-auto bg-brand-gold hover:bg-brand-lightgold text-brand-deepred px-8 md:px-10 py-4 md:py-5 text-xs md:text-sm font-semibold tracking-[0.25em] uppercase transition-all duration-300 shadow-xl flex items-center justify-center space-x-3 group rounded-sm">
                     <span class="font-serif">作品を見る</span>
-                    <i class="fa-solid fa-arrow-right text-xs group-hover:translate-x-2 transition-transform duration-300"></i>
+                    <i class="fa-solid fa-arrow-right text-xs group-hover:translate-x-1.5 transition-transform duration-300"></i>
                 </button>
                 
                 <!-- Secondary Action -->
-                <a href="mailto:contact@example.com" class="w-full sm:w-auto border border-white/30 hover:border-white px-10 py-5 text-sm font-semibold tracking-[0.25em] uppercase text-white transition-all duration-300 hover:bg-white/5 rounded-sm">
+                <a href="mailto:contact@example.com" class="w-full sm:w-auto border border-white/20 hover:border-white px-8 md:px-10 py-4 md:py-5 text-xs md:text-sm font-semibold tracking-[0.25em] uppercase text-white transition-all duration-300 hover:bg-white/5 rounded-sm">
                     個別面談を希望する
                 </a>
             </div>
 
-            <!-- Footer Small Board Marks -->
-            <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mt-24 max-w-3xl mx-auto pt-14 border-t border-white/10">
+            <!-- Footer Small Board Marks (Responsive grid) -->
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mt-16 md:mt-24 max-w-3xl mx-auto pt-10 md:pt-14 border-t border-white/10">
                 <div class="text-center">
-                    <span class="block text-brand-gold font-playfair text-xl mb-1">01</span>
-                    <span class="block font-serif text-[10px] tracking-widest text-white/70 uppercase">Brand Essence</span>
+                    <span class="block text-brand-gold font-playfair text-lg md:text-xl mb-1">01</span>
+                    <span class="block font-serif text-[9px] md:text-[10px] tracking-widest text-white/60 uppercase">Brand Essence</span>
                 </div>
                 <div class="text-center">
-                    <span class="block text-brand-gold font-playfair text-xl mb-1">02</span>
-                    <span class="block font-serif text-[10px] tracking-widest text-white/70 uppercase">Self Independence</span>
+                    <span class="block text-brand-gold font-playfair text-lg md:text-xl mb-1">02</span>
+                    <span class="block font-serif text-[9px] md:text-[10px] tracking-widest text-white/60 uppercase">Self Independence</span>
                 </div>
                 <div class="text-center">
-                    <span class="block text-brand-gold font-playfair text-xl mb-1">03</span>
-                    <span class="block font-serif text-[10px] tracking-widest text-white/70 uppercase">Visual Masterpiece</span>
+                    <span class="block text-brand-gold font-playfair text-lg md:text-xl mb-1">03</span>
+                    <span class="block font-serif text-[9px] md:text-[10px] tracking-widest text-white/60 uppercase">Visual Masterpiece</span>
                 </div>
                 <div class="text-center">
-                    <span class="block text-brand-gold font-playfair text-xl mb-1">04</span>
-                    <span class="block font-serif text-[10px] tracking-widest text-white/70 uppercase">Quiet Power</span>
+                    <span class="block text-brand-gold font-playfair text-lg md:text-xl mb-1">04</span>
+                    <span class="block font-serif text-[9px] md:text-[10px] tracking-widest text-white/60 uppercase">Quiet Power</span>
                 </div>
             </div>
         </div>
     </section>
 
     <!-- FOOTER -->
-    <footer class="bg-brand-dark text-white/50 py-20 px-6 md:px-12 border-t premium-border">
-        <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-10">
+    <footer class="bg-brand-dark text-white/40 py-12 md:py-20 px-4 sm:px-6 md:px-12 border-t premium-border">
+        <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-8 md:gap-10">
             <!-- Brand Column -->
             <div class="flex flex-col items-center md:items-start text-center md:text-left">
-                <span class="font-serif text-2xl font-medium tracking-[0.2em] text-brand-lightgold">
+                <span class="font-serif text-xl md:text-2xl font-medium tracking-[0.2em] text-brand-lightgold">
                     KAZUMIN
                 </span>
-                <span class="font-sans text-[10px] uppercase tracking-[0.3em] text-brand-gold">
+                <span class="font-sans text-[8px] md:text-[9px] uppercase tracking-[0.3em] text-brand-gold">
                     MAMA PRESIDENT
                 </span>
-                <p class="font-serif text-[11px] tracking-widest text-white/40 mt-4 max-w-xs leading-relaxed">
+                <p class="font-serif text-[10px] md:text-[11px] tracking-widest text-white/30 mt-3 max-w-xs leading-relaxed">
                     ありのままを最高級の価値に変えるブランディング。しなやかに自立する現代女性のコンパス。
                 </p>
             </div>
 
             <!-- Navigation Links -->
-            <div class="flex flex-wrap justify-center gap-8 text-xs font-serif tracking-[0.2em]">
+            <div class="flex flex-wrap justify-center gap-6 md:gap-8 text-[11px] font-serif tracking-[0.2em]">
                 <a href="#concept" class="hover:text-white transition-colors duration-300">Concept</a>
                 <a href="#values" class="hover:text-white transition-colors duration-300">Philosophy</a>
                 <a href="#activities" class="hover:text-white transition-colors duration-300">Activities</a>
@@ -633,11 +655,11 @@
 
             <!-- Copyright and Top Button -->
             <div class="flex flex-col items-center md:items-end">
-                <p class="text-[10px] font-sans tracking-widest text-white/30 text-center md:text-right">
+                <p class="text-[9px] md:text-[10px] font-sans tracking-widest text-white/20 text-center md:text-right">
                     &copy; 2026 KAZUMIN MAMA PRESIDENT. ALL RIGHTS RESERVED.
                 </p>
-                <button onclick="window.scrollTo({top: 0, behavior: 'smooth'})" class="mt-4 text-[10px] font-sans tracking-[0.25em] text-brand-gold hover:text-white transition-colors duration-300">
-                    BACK TO TOP <i class="fa-solid fa-arrow-up text-[9px] ml-1"></i>
+                <button onclick="window.scrollTo({top: 0, behavior: 'smooth'})" class="mt-3 text-[9px] font-sans tracking-[0.25em] text-brand-gold hover:text-white transition-colors duration-300 uppercase">
+                    BACK TO TOP <i class="fa-solid fa-arrow-up text-[8px] ml-1"></i>
                 </button>
             </div>
         </div>
@@ -646,63 +668,63 @@
     <!-- LUXURY PORTFOLIO MODAL (The CTA Target) -->
     <div id="galleryModal" class="fixed inset-0 z-[100] flex items-center justify-center bg-brand-dark/95 opacity-0 pointer-events-none transition-all duration-500">
         <!-- Close overlay trigger -->
-        <button onclick="closeGalleryModal()" class="absolute top-6 right-6 md:top-12 md:right-12 text-white/60 hover:text-brand-gold text-2xl transition-colors z-[110]">
+        <button onclick="closeGalleryModal()" class="absolute top-4 right-4 md:top-8 md:right-8 text-white/50 hover:text-brand-gold text-xl md:text-2xl transition-colors z-[110]">
             <i class="fa-solid fa-xmark"></i>
         </button>
         
-        <div class="max-w-6xl w-full mx-6 md:mx-12 bg-brand-bg rounded-sm shadow-2xl relative overflow-hidden max-h-[85vh] flex flex-col z-[105]">
+        <div class="max-w-6xl w-full mx-4 sm:mx-8 md:mx-12 bg-brand-bg rounded-sm shadow-2xl relative overflow-hidden max-h-[85vh] flex flex-col z-[105]">
             <!-- Header for Modal -->
-            <div class="p-6 md:p-8 border-b premium-border flex justify-between items-center bg-brand-bg">
+            <div class="p-4 sm:p-6 md:p-8 border-b premium-border flex justify-between items-center bg-brand-bg">
                 <div>
-                    <span class="font-sans text-[10px] tracking-[0.3em] uppercase text-brand-gold font-bold">PORTFOLIO COLLECTION</span>
-                    <h3 class="font-serif text-lg md:text-2xl text-brand-deepred font-light mt-1">
+                    <span class="font-sans text-[9px] md:text-[10px] tracking-[0.3em] uppercase text-brand-gold font-bold">PORTFOLIO COLLECTION</span>
+                    <h3 class="font-serif text-base sm:text-lg md:text-2xl text-brand-deepred font-light mt-0.5">
                         主宰プロデュース・世界観実績
                     </h3>
                 </div>
-                <span class="font-playfair text-xs italic text-brand-dark/40 hidden sm:block">Aesthetic Masterpieces</span>
+                <span class="font-playfair text-[10px] md:text-xs italic text-brand-dark/40 hidden sm:block">Aesthetic Masterpieces</span>
             </div>
 
             <!-- Scrollable Content of portfolios -->
-            <div class="overflow-y-auto p-6 md:p-10 space-y-12">
-                <p class="font-serif text-brand-dark/80 text-sm leading-relaxed tracking-widest border-l-2 border-brand-gold pl-4 max-w-2xl">
-                    美意識あるブランディングによって、自分本来の強みを引き出し、圧倒的な価値を獲得した美しい実例たち。
+            <div class="overflow-y-auto p-4 sm:p-6 md:p-10 space-y-8 md:space-y-12">
+                <p class="font-serif text-brand-dark/80 text-xs sm:text-sm leading-relaxed tracking-widest border-l-2 border-brand-gold pl-3 md:pl-4 max-w-2xl">
+                    美意識あるブランディングによって、自分本来の強みとエレガンスを引き出し、圧倒的な市場価値を獲得した美しい実例たち。
                 </p>
 
                 <!-- Grid of Custom Works -->
-                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
                     
                     <!-- Portfolio Case 1 -->
-                    <div class="group bg-brand-beige/20 p-5 border premium-border hover:border-brand-gold transition-all duration-500 rounded-sm">
-                        <div class="relative aspect-[16/10] bg-brand-deepred flex items-center justify-center mb-5 overflow-hidden">
-                            <div class="absolute inset-0 bg-brand-red/10 group-hover:bg-transparent transition-colors duration-500 z-10"></div>
-                            <span class="font-playfair text-xl tracking-[0.25em] text-brand-lightgold z-20">PROJECT 01</span>
+                    <div class="group bg-brand-beige/20 p-4 sm:p-5 border premium-border hover:border-brand-gold transition-all duration-500 rounded-sm">
+                        <div class="relative aspect-[16/10] bg-brand-deepred flex items-center justify-center mb-4 md:mb-5 overflow-hidden">
+                            <div class="absolute inset-0 bg-brand-red/15 group-hover:bg-transparent transition-colors duration-500 z-10"></div>
+                            <span class="font-playfair text-lg md:text-xl tracking-[0.25em] text-brand-lightgold z-20">PROJECT 01</span>
                         </div>
-                        <h4 class="font-serif text-base font-semibold text-brand-deepred">プレミアム・ハイジュエリーブランド</h4>
-                        <p class="font-serif text-xs text-brand-dark/75 mt-3 leading-relaxed tracking-wider">
+                        <h4 class="font-serif text-sm sm:text-base font-semibold text-brand-deepred">プレミアム・ハイジュエリーブランド</h4>
+                        <p class="font-serif text-[11px] sm:text-xs text-brand-dark/75 mt-2 sm:mt-3 leading-relaxed tracking-wider">
                             専業主婦期からジュエリーデザイナーとしての完全な自律をプロデュース。徹底的に美意識に特化したビジュアルと世界観構築により、オーダー開始1分で数千万円分が即完売する絶対的なファン基盤を構築。
                         </p>
                     </div>
 
                     <!-- Portfolio Case 2 -->
-                    <div class="group bg-brand-beige/20 p-5 border premium-border hover:border-brand-gold transition-all duration-500 rounded-sm">
-                        <div class="relative aspect-[16/10] bg-brand-deepred flex items-center justify-center mb-5 overflow-hidden">
-                            <div class="absolute inset-0 bg-brand-red/10 group-hover:bg-transparent transition-colors duration-500 z-10"></div>
-                            <span class="font-playfair text-xl tracking-[0.25em] text-brand-lightgold z-20">PROJECT 02</span>
+                    <div class="group bg-brand-beige/20 p-4 sm:p-5 border premium-border hover:border-brand-gold transition-all duration-500 rounded-sm">
+                        <div class="relative aspect-[16/10] bg-brand-deepred flex items-center justify-center mb-4 md:mb-5 overflow-hidden">
+                            <div class="absolute inset-0 bg-brand-red/15 group-hover:bg-transparent transition-colors duration-500 z-10"></div>
+                            <span class="font-playfair text-lg md:text-xl tracking-[0.25em] text-brand-lightgold z-20">PROJECT 02</span>
                         </div>
-                        <h4 class="font-serif text-base font-semibold text-brand-deepred">ライフスタイル・マインドフルネス講座</h4>
-                        <p class="font-serif text-xs text-brand-dark/75 mt-3 leading-relaxed tracking-wider">
+                        <h4 class="font-serif text-sm sm:text-base font-semibold text-brand-deepred">ライフスタイル・マインドフルネス講座</h4>
+                        <p class="font-serif text-[11px] sm:text-xs text-brand-dark/75 mt-2 sm:mt-3 leading-relaxed tracking-wider">
                             「家庭も、自分らしさも諦めない」生き方を体系化したプレミアム講座のブランドディレクション。感性に響く情緒的なカラーと上品なストーリーテリングにより、募集開始からわずか数時間で満員、年次売上の大幅拡大。
                         </p>
                     </div>
 
                     <!-- Portfolio Case 3 -->
-                    <div class="group bg-brand-beige/20 p-5 border premium-border hover:border-brand-gold transition-all duration-500 rounded-sm">
-                        <div class="relative aspect-[16/10] bg-brand-deepred flex items-center justify-center mb-5 overflow-hidden">
-                            <div class="absolute inset-0 bg-brand-red/10 group-hover:bg-transparent transition-colors duration-500 z-10"></div>
-                            <span class="font-playfair text-xl tracking-[0.25em] text-brand-lightgold z-20">PROJECT 03</span>
+                    <div class="group bg-brand-beige/20 p-4 sm:p-5 border premium-border hover:border-brand-gold transition-all duration-500 rounded-sm">
+                        <div class="relative aspect-[16/10] bg-brand-deepred flex items-center justify-center mb-4 md:mb-5 overflow-hidden">
+                            <div class="absolute inset-0 bg-brand-red/15 group-hover:bg-transparent transition-colors duration-500 z-10"></div>
+                            <span class="font-playfair text-lg md:text-xl tracking-[0.25em] text-brand-lightgold z-20">PROJECT 03</span>
                         </div>
-                        <h4 class="font-serif text-base font-semibold text-brand-deepred">エディトリアル書籍・メディアプロデュース</h4>
-                        <p class="font-serif text-xs text-brand-dark/75 mt-3 leading-relaxed tracking-wider">
+                        <h4 class="font-serif text-sm sm:text-base font-semibold text-brand-deepred">エディトリアル書籍・メディアプロデュース</h4>
+                        <p class="font-serif text-[11px] sm:text-xs text-brand-dark/75 mt-2 sm:mt-3 leading-relaxed tracking-wider">
                             女性経営者の生き様を、雑誌のような高品質なビジュアルブックとして企画・編集。ブランドの格調を飛躍的に高め、出版を起点とした新規のVIP会員、メディアオファーを多数生み出すサイクルを設計。
                         </p>
                     </div>
@@ -710,11 +732,11 @@
                 </div>
 
                 <!-- Footer elements of Modal -->
-                <div class="text-center pt-8 border-t premium-border">
-                    <p class="font-serif text-xs text-brand-dark/60 italic mb-5 tracking-widest">
+                <div class="text-center pt-6 md:pt-8 border-t premium-border">
+                    <p class="font-serif text-[11px] sm:text-xs text-brand-dark/60 italic mb-4 md:mb-5 tracking-widest">
                         「あなたの人生のすべての軌跡が、世界で最も美しいアートになる。」
                     </p>
-                    <button onclick="closeGalleryModal()" class="bg-brand-deepred hover:bg-brand-red text-white font-sans text-xs tracking-[0.25em] uppercase px-8 py-3.5 transition-colors duration-300 rounded-sm">
+                    <button onclick="closeGalleryModal()" class="bg-brand-deepred hover:bg-brand-red text-white font-sans text-[10px] md:text-xs tracking-[0.25em] uppercase px-6 sm:px-8 py-3 sm:py-3.5 transition-colors duration-300 rounded-sm">
                         ギャラリーを閉じる
                     </button>
                 </div>
@@ -747,39 +769,97 @@
             }
         });
 
+        // Mobile Menu Toggle
+        let isMobileMenuOpen = false;
+        function toggleMobileMenu() {
+            const menu = document.getElementById('mobile-menu');
+            const l1 = document.getElementById('hamburger-line-1');
+            const l2 = document.getElementById('hamburger-line-2');
+            const l3 = document.getElementById('hamburger-line-3');
+            
+            isMobileMenuOpen = !isMobileMenuOpen;
+            
+            if (isMobileMenuOpen) {
+                menu.classList.remove('opacity-0', 'pointer-events-none');
+                menu.classList.add('opacity-100');
+                document.body.style.overflow = 'hidden';
+                
+                // Animate hamburger to X
+                l1.style.transform = 'translateY(8px) rotate(45deg)';
+                l2.style.opacity = '0';
+                l3.style.transform = 'translateY(-8px) rotate(-45deg)';
+            } else {
+                menu.classList.remove('opacity-100');
+                menu.classList.add('opacity-0', 'pointer-events-none');
+                document.body.style.overflow = '';
+                
+                // Revert X to hamburger
+                l1.style.transform = '';
+                l2.style.opacity = '1';
+                l3.style.transform = '';
+            }
+        }
+
         // Elegant Dynamic Scroll Headers
         window.addEventListener('scroll', function() {
-            const header = document.querySelector('header');
+            const header = document.getElementById('main-header');
             if (window.scrollY > 40) {
-                header.classList.add('py-3.5', 'bg-brand-bg/95', 'shadow-md');
-                header.classList.remove('py-5', 'bg-brand-bg/85');
+                header.classList.add('py-2.5', 'bg-brand-bg/95', 'shadow-md');
+                header.classList.remove('py-4', 'md:py-5', 'bg-brand-bg/90');
             } else {
-                header.classList.add('py-5', 'bg-brand-bg/85');
-                header.classList.remove('py-3.5', 'bg-brand-bg/95', 'shadow-md');
+                header.classList.add('py-4', 'md:py-5', 'bg-brand-bg/90');
+                header.classList.remove('py-2.5', 'bg-brand-bg/95', 'shadow-md');
             }
         });
 
+        // Robust Video Load Checker to bypass caching issues
+        function forceVideoReveal() {
+            const videos = [
+                { video: document.getElementById('hero-video'), fallback: document.getElementById('hero-img-fallback') },
+                { video: document.getElementById('profile-video'), fallback: document.getElementById('profile-img-fallback') }
+            ];
+
+            videos.forEach(item => {
+                if (item.video) {
+                    // Check if video is already loaded or has enough data loaded due to cache
+                    if (item.video.readyState >= 2) { 
+                        item.video.classList.add('image-loaded');
+                        if (item.fallback) item.fallback.style.display = 'none';
+                    } else {
+                        // Fallback listener in case it loads slowly
+                        item.video.addEventListener('loadeddata', function() {
+                            item.video.classList.add('image-loaded');
+                            if (item.fallback) item.fallback.style.display = 'none';
+                        });
+                    }
+                }
+            });
+        }
+
         // Intersection Observer for Scroll Animations (Revealing elements beautifully)
         document.addEventListener('DOMContentLoaded', function() {
+            forceVideoReveal();
+
             const elements = document.querySelectorAll('.reveal-element');
-            
             const observer = new IntersectionObserver((entries) => {
                 entries.forEach(entry => {
                     if (entry.isIntersecting) {
                         entry.target.classList.add('active');
-                        // Optional: Unobserve after revealing
                         observer.unobserve(entry.target);
                     }
                 });
             }, {
-                threshold: 0.1, // Trigger early for elegant timing
-                rootMargin: '0px 0px -50px 0px'
+                threshold: 0.05, // Lower threshold for smooth trigger on mobile
+                rootMargin: '0px 0px -40px 0px'
             });
 
             elements.forEach(element => {
                 observer.observe(element);
             });
         });
+
+        // Second check on full page load
+        window.addEventListener('load', forceVideoReveal);
     </script>
 </body>
 </html>
